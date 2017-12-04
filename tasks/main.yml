@@ -10,5 +10,6 @@
 - include: status_success.yml
   when: status | success
 
-- action: "{{ cloudinit_action_on_timeout }}"
+- name: on timeout handler
+  action: "{{ cloudinit_action_on_timeout }}"
   when: (status | failed) and (cloudinit_action_on_timeout | bool)

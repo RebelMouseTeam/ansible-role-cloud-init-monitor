@@ -14,5 +14,6 @@
   ignore_errors: yes
   register: cloudinit_assertions
 
-- action: "{{ cloudinit_action_on_error }}"
+- name: on error handler
+  action: "{{ cloudinit_action_on_error }}"
   when: (cloudinit_assertions | failed) and (cloudinit_action_on_error | bool)
