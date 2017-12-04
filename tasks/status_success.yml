@@ -1,0 +1,18 @@
+---
+- shell: cat /var/lib/cloud/data/status.json
+  register: status_json
+
+- set_fact:
+    cloudinit_status: "{{ status_json.stdout | from_json }}"
+
+- assert:
+    that:
+      - 'not cloudinit_status["v1"]["init"]["errors"]'
+      - 'not cloudinit_status["v1"]["init-local"]["errors"]'
+      - 'not cloudinit_status["v1"]["modules-config"]["errors"]'
+      - 'not cloudinit_status["v1"]["modules-final"]["errors"]'
+  ignore_errors: yes
+  register: cloudinit_assertions
+
+- action: "{{ cloudinit_action_on_error }}"
+  when: cloudinit_assertions | failed and cloudinit_action_on_error

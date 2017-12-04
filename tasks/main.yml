@@ -1,0 +1,14 @@
+---
+- name: wait for /var/lib/cloud/data/status.json
+  wait_for:
+    path: /var/lib/cloud/data/status.json
+    state: present
+    timeout: "{{ cloudinit_timeout }}"
+  ignore_errors: yes
+  register: status
+
+- include: status_success.yml
+  when: status | success
+
+- action: "{{ cloudinit_action_on_timeout }}"
+  when: status | failed and cloudinit_action_on_timeout

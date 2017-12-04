@@ -1,0 +1,4 @@
+---
+cloudinit_timeout: 600
+cloudinit_action_on_error:
+cloudinit_action_on_timeout:
