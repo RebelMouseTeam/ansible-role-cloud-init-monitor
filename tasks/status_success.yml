@@ -1,6 +1,8 @@
 ---
-- shell: cat /var/lib/cloud/data/status.json
+- name: read status
+  shell: cat /var/lib/cloud/data/status.json
   register: status_json
+  changed_when: no
 
 - set_fact:
     cloudinit_status: "{{ status_json.stdout | from_json }}"
