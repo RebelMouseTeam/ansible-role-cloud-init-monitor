@@ -1,5 +1,5 @@
 ---
-- name: read status
+- name: read cloud-init status
   shell: cat /var/lib/cloud/data/status.json
   register: status_json
   changed_when: no
