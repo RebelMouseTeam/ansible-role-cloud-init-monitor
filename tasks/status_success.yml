@@ -15,4 +15,4 @@
   register: cloudinit_assertions
 
 - action: "{{ cloudinit_action_on_error }}"
-  when: cloudinit_assertions | failed and cloudinit_action_on_error | defined
+  when: cloudinit_assertions | failed and cloudinit_action_on_error | bool
