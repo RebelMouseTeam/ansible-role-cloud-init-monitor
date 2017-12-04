@@ -11,4 +11,4 @@
   when: status | success
 
 - action: "{{ cloudinit_action_on_timeout }}"
-  when: status | failed and cloudinit_action_on_timeout
+  when: status | failed and cloudinit_action_on_timeout | defined
